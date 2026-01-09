@@ -26,7 +26,7 @@ public class TestListener implements ITestListener,IAnnotationTransformer {
 		String testName = result.getMethod().getMethodName();
 		// Start Logging in Extent Reports
 		ExtentManager.startTest(testName);
-		ExtentManager.logStep("Test Started: " + testName);
+		ExtentManager.logStep("Test Started:");
 	}
 
 	// Triggered when a Test Succeeds
