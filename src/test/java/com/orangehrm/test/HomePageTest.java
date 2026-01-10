@@ -21,6 +21,7 @@ public class HomePageTest extends BaseClass{
 	}
 	@Test(dataProvider="validLoginData",dataProviderClass = DataProviders.class)
 	public void VerifyOrangeHRMlogo(String username,String password) {
+		// Test checkin
 		//ExtentManager.startTest("Home Page verify Logo Test");  //This has been implemented in TestListener
 		ExtentManager.logStep("Navigating to Login Page entering Username and Password");
 		loginPage.login(username, password);
