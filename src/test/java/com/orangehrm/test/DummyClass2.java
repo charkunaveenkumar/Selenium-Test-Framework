@@ -9,6 +9,7 @@ public class DummyClass2 extends BaseClass {
 	
 	@Test
 	public void dummyTest2() {
+		//Test Checkin
 		//ExtentManager.startTest("DummyTest2 Test");  //This has been implemented in TestListener
 		String title=getDriver().getTitle();
 		ExtentManager.logStep("Verifying the Title");
