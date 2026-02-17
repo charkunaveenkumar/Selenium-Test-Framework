@@ -2,11 +2,14 @@ package com.orangehrm.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.orangehrm.actiondriver.ActionDriver;
 import com.orangehrm.base.BaseClass;
 
 public class LoginPage {
+	
 	private ActionDriver actionDriver;
 	
 	//Define locators using By class
@@ -27,10 +30,11 @@ public class LoginPage {
 	}
 	
 	//Method to perform login
+
 	public void login(String userName, String passsword) {
 		actionDriver.enterText(userNameField,userName);
 		actionDriver.enterText(passwordField,passsword);
-		actionDriver.Click(loginButton);
+		actionDriver.click(loginButton);
 	}
 	
 	//Method to check if error message is displayed

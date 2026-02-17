@@ -8,6 +8,7 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.LockSupport;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -23,6 +24,8 @@ import org.testng.asserts.SoftAssert;
 import com.orangehrm.actiondriver.ActionDriver;
 import com.orangehrm.utilities.ExtentManager;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -37,6 +40,7 @@ public class BaseClass {
 	
 	private static ThreadLocal<WebDriver> driver=new ThreadLocal<>();
 	private static ThreadLocal<ActionDriver> actionDriver=new ThreadLocal<>();
+	
 	public static final Logger logger = LogManager.getLogger(BaseClass.class);
 	
 	protected ThreadLocal<SoftAssert> softAssert = ThreadLocal.withInitial(SoftAssert::new);
@@ -83,6 +87,7 @@ public class BaseClass {
 		
 		//Initialize ActionDriver for the current Thread
 		actionDriver.set(new ActionDriver(getDriver()));
+		getDriver().manage().window().setSize(new Dimension(1920, 1080));
 		logger.info("ActionDriver Initialized for Thread: "+Thread.currentThread().getId());
 
 	}
@@ -94,18 +99,22 @@ public class BaseClass {
 
 		if (browser.equalsIgnoreCase("chrome")) {
 			
-     //Create chromeoptions
+  //Create chromeoptions
+			WebDriverManager.chromedriver().setup();
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("--headless=new"); // Run chrome in headless mode
 			options.addArguments("--disable-gpu"); //Run GPU for headless mode
-			//options.addArguments("--window-size=1920,1080");//set window size
+			options.addArguments("--use-angle=swiftshader");
+			options.addArguments("--window-size=1920,1080");//set window size
 			options.addArguments("--disable-save-password-bubble");
 			options.addArguments("--disable-notifications");//Disable browser notifications
 			options.addArguments("--no-sandbox");//Needed for CI/CD environments
 			options.addArguments("--disable-dev-shm-usage");//Resolve issues in resources 
+			options.addArguments("--remote-allow-o-rigins=*");
 			
 			//driver = new ChromeDriver(options);
 			driver.set(new ChromeDriver(options)); //New changes as per Thread
+	
 			ExtentManager.registerDriver(getDriver());
 			logger.info("ChromeDriver Instance is created");
 		} else if (browser.equalsIgnoreCase("firefox")) {

@@ -32,11 +32,11 @@ public class ActionDriver {
 	}
 
 	// method to click an element
-	public void Click(By by) {
+	public void click(By by) {
 		String elementDescription = getElementDescription(by);
 		try {
 			applyBorder(by,"green");
-			//waitForElementToBeClickable(by);
+			waitForElementToBeClickable(by);
 			driver.findElement(by).click();
 			ExtentManager.logStep("clicked an element: " + elementDescription);
 			logger.info("Clicked an element-->" + elementDescription);
@@ -46,11 +46,11 @@ public class ActionDriver {
 			ExtentManager.logFailure(BaseClass.getDriver(), "unable to click element: ",elementDescription+"_unable to click an element ");
 			logger.error("Unable to click element");
 		}
-	}
+	} 
 
 	// wait for the element to be clickable
 
-	private void waitForElementToBeClickable(By by) {
+	public void waitForElementToBeClickable(By by) {
 		try {
 			wait.until(ExpectedConditions.elementToBeClickable(by));
 		} catch (Exception e) {
@@ -59,9 +59,9 @@ public class ActionDriver {
 	}
 	
 	// wait for element to be visible
-	private void waitForElementToBeVisible(By by) {
+	public void waitForElementToBeVisible(By by) {
 		try {
-			 wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+			 wait.until(ExpectedConditions.presenceOfElementLocated(by));
 		} catch (Exception e) {
 			logger.error("element is not visible:" + e.getMessage());
 		}
