@@ -87,7 +87,7 @@ public class BaseClass {
 		
 		//Initialize ActionDriver for the current Thread
 		actionDriver.set(new ActionDriver(getDriver()));
-		getDriver().manage().window().setSize(new Dimension(1920, 1080));//problem solved for running in headless mode
+		getDriver().manage().window().setSize(new Dimension(1920, 1080));//problem solve for running in headless mode
 		logger.info("ActionDriver Initialized for Thread: "+Thread.currentThread().getId());
 
 	}
