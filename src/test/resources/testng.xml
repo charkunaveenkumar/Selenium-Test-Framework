@@ -4,7 +4,7 @@
 		<listener class-name="com.orangehrm.listeners.TestListener"></listener>
 	</listeners>
 
-	<test name="OramgeHRMTest">
+	<test name="OrangeHRMTest">
 		<classes>
 			<class name="com.orangehrm.test.DummyClass" />
 			<class name="com.orangehrm.test.DummyClass2" />
